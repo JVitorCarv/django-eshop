@@ -8,7 +8,7 @@ from django_filters import (
 from drf_yasg import openapi
 
 
-def get_parameter_type(field: any):
+def get_parameter_type(field: any) -> any:
     if isinstance(field, (CharFilter, ChoiceFilter, ModelChoiceFilter)):
         return openapi.TYPE_STRING
     elif isinstance(field, (ModelMultipleChoiceFilter)):
@@ -19,7 +19,7 @@ def get_parameter_type(field: any):
         return openapi.TYPE_STRING
 
 
-def get_filter_parameters(filter_class):
+def get_filter_parameters(filter_class) -> list[openapi.Parameter]:
     parameters = []
     for field_name, field in filter_class.base_filters.items():
         parameter = openapi.Parameter(
